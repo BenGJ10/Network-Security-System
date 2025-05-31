@@ -12,7 +12,7 @@ class TrainingPipelineConfig:
     Sets up high-level configurations such as naming the pipeline and creating a timestamped artifact
     directory to store outputs
     """
-    def __init__(self, timestamp = datetime.now):
+    def __init__(self, timestamp = datetime.now()):
         timestamp = timestamp.strftime("%Y-%m-%d-%H-%M-%S")
         self.pipeline_name = training_pipeline.PIPELINE_NAME
         self.artifact_name = training_pipeline.ARTIFCAT_DIR
