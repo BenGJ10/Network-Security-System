@@ -6,6 +6,9 @@ This project focuses on building a Network Security System that processes phishi
 
 The system is designed to identify and analyze phishing-related data through structured data workflows. It aims to automate the ingestion and processing of large datasets related to phishing activities for security analysis and detection.
 
+## Workflow
+![Workflow Diagram] (images/workflow.png)
+
 ## ⚙️ ETL Pipeline
 
 The core of this system is built around the ETL process:
