@@ -23,3 +23,13 @@ class DataValidationArtifact:
     invalid_train_file_path: str
     invalid_test_file_path: str
     drift_report_file_path: str
+
+@dataclass
+class DataTransformationArtifact:
+    """
+    Data class for storing paths related to data transformation artifacts.
+    This class holds the file paths for transformed object files and transformed training and testing datasets.
+    """
+    transformed_object_file_path: str   
+    transformed_train_file_path: str
+    transformed_test_file_path: str
