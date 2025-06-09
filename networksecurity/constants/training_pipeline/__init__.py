@@ -50,7 +50,7 @@ PREPROCESSING_OBJECT_FILE_NAME = "preprocessing.pkl"
 # Used in KNN Imputer class
 DATA_TRANSFORMATION_IMPUTER_PARAMS: dict = {
     "missing_values": np.nan,
-    "n_neighbours": 3,
+    "n_neighbors": 3,
     "weights": "uniform"
 }
 DATA_TRANSFORMATION_TRAIN_FILE_PATH: str = "train.npy"
