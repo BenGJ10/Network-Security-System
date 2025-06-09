@@ -33,3 +33,23 @@ class DataTransformationArtifact:
     transformed_object_file_path: str   
     transformed_train_file_path: str
     transformed_test_file_path: str
+
+@dataclass
+class ClassificationMetricArtifact:
+    """
+    Data class for storing classification metrics.
+    This class holds the F1 score, precision, and recall score for a classification model.
+    """
+    f1_score: float
+    precision: float
+    recall_score: float
+    
+@dataclass
+class ModelTrainerArtifact:
+    """
+    Data class for storing model training artifacts.
+    This class holds the path to the trained model file and the metric artifacts for both training and testing datasets.
+    """
+    trained_model_file_path: str
+    train_metric_artifact: ClassificationMetricArtifact
+    test_metric_artifact: ClassificationMetricArtifact
