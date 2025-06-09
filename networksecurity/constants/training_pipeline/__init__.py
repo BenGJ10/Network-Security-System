@@ -11,11 +11,11 @@ TARGET_COLUMN = "Result"
 PIPELINE_NAME: str = "NetworkSecurity"
 ARTIFCAT_DIR: str = "Artifacts"
 FILE_NAME: str = "phishingData.csv"
-
 TRAIN_FILE_NAME: str = "train.csv"
 TEST_FILE_NAME: str = "test.csv"
-
 SCHEMA_FILE_PATH = os.path.join('schemas', 'schema.yaml')
+MODEL_FILE_NAME: str = "model.pkl"
+SAVED_MODEL_DIR = os.path.join('saved_models')
 
 """
 Data Ingestion related constants starts with DATA_INGESTION variable name

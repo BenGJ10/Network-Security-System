@@ -41,7 +41,7 @@ class ClassificationMetricArtifact:
     This class holds the F1 score, precision, and recall score for a classification model.
     """
     f1_score: float
-    precision: float
+    precision_score: float
     recall_score: float
     
 @dataclass
