@@ -9,8 +9,6 @@ The system is designed to identify and analyze phishing-related data through str
 ## Workflow
 ![Workflow Diagram](images/workflow.png)
 
-### ⚙️ Know about ETL Pipelines
-
 The core of this system is built around the ETL process:
 
 ## ⚙️ ETL Pipeline – Extract, Transform, Load
