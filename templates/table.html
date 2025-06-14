@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Prediction Results</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 40px;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            margin-top: 20px;
+        }
+
+        .table thead {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="table-container">
+            <h2 class="text-center">📊 Phishing Prediction Results</h2>
+            {{ table | safe }}
+        </div>
+        <p class="footer-note text-center">Note: The predictions are based on the uploaded dataset and trained model. Review the results carefully.</p>
+    </div>
+
+</body>
+</html>
