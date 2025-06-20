@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security URL Detection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e5e7eb;
+            font-family: 'Inter', sans-serif;
+        }
+        .alert {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .alert-hidden {
+            opacity: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-gray-900 shadow-lg">
+        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-2xl font-bold">Network Security URL Detection</h1>
+            <p class="text-sm text-gray-400">Analyze URLs for potential security threats</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 w-full">
+        <!-- URL Input Form -->
+        <section class="bg-gray-800 rounded-lg p-6 shadow-lg mb-6 max-w-5xl mx-auto">
+            <h2 class="text-lg font-semibold mb-4">Enter URL</h2>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <input
+                    type="text"
+                    id="urlInput"
+                    placeholder="Enter a valid URL here"
+                    class="flex-grow bg-gray-700 border border-gray-600 text-white rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto"
+                >
+                <button
+                    id="analyzeBtn"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md transition duration-200"
+                    onclick="analyzeURL()"
+                >
+                    Analyze
+                </button>
+            </div>
+            <p id="urlError" class="text-red-400 text-sm mt-2 hidden">Please enter a valid URL</p>
+        </section>
+
+        <!-- Result Section -->
+        <section id="resultSection" class="bg-gray-800 rounded-lg p-6 shadow-lg mb-6 max-w-5xl mx-auto">
+            <h2 class="text-lg font-semibold mb-4">Analysis Result</h2>
+            <div id="result" class="text-lg"></div>
+        </section>
+
+        <!-- History Table -->
+        <section class="bg-gray-800 rounded-lg p-6 shadow-lg max-w-5xl mx-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">Analysis History</h2>
+                <button
+                    id="clearHistoryBtn"
+                    class="bg-red-600 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded-md transition duration-200"
+                    onclick="clearHistory()"
+                >
+                    Clear History
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-left text-gray-400">
+                    <thead class="text-xs uppercase bg-gray-700">
+                        <tr>
+                            <th class="px-4 py-2">URL</th>
+                            <th class="px-4 py-2">Result</th>
+                            <th class="px-4 py-2">Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-4 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400">
+        <p class="text-sm">
+            &copy; 2025 Network Security System | Crafted by Ben Gregory John | 
+            <a href="https://github.com/BenGJ10" class="underline hover:text-white" target="_blank">GitHub</a>
+        </p>
+    </div>
+</footer>
+
+    <script>
+        // Validate URL format
+        function isValidURL(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // Analyze URL by calling the backend
+        async function analyzeURL() {
+            const urlInput = document.getElementById('urlInput').value;
+            const urlError = document.getElementById('urlError');
+            const resultSection = document.getElementById('resultSection');
+            const result = document.getElementById('result');
+            const analyzeBtn = document.getElementById('analyzeBtn');
+
+            // Validate input
+            if (!urlInput || !isValidURL(urlInput)) {
+                urlError.classList.remove('hidden');
+                return;
+            }
+            urlError.classList.add('hidden');
+
+            // Show loading state
+            analyzeBtn.disabled = true;
+            analyzeBtn.textContent = 'Analyzing...';
+            resultSection.classList.remove('alert-hidden');
+            result.innerHTML = '<span class="text-gray-400">Analyzing URL...</span>';
+
+            try {
+                const response = await fetch('http://localhost:8000/predict', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: urlInput })
+                });
+                const data = await response.json();
+
+                if (data.error) {
+                    result.innerHTML = `<span class="text-red-400">${data.error}</span>`;
+                } else {
+                    let resultClass = '';
+                    if (data.prediction === 1) {
+                        resultClass = 'text-green-400';
+                        result.innerHTML = 'The URL is <strong>Safe</strong>!';
+                    } else if (data.prediction === 0) {
+                        resultClass = 'text-yellow-400';
+                        result.innerHTML = 'The URL is <strong>Suspicious</strong>.';
+                    } else {
+                        resultClass = 'text-red-400';
+                        result.innerHTML = 'The URL is <strong>Malicious</strong>!';
+                    }
+                    result.className = resultClass;
+
+                    // Update history
+                    addToHistory(urlInput, data.prediction);
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="text-red-400">Error: ${error.message}</span>`;
+            } finally {
+                analyzeBtn.disabled = false;
+                analyzeBtn.textContent = 'Analyze';
+            }
+        }
+
+        // Add analysis to history table
+        function addToHistory(url, prediction) {
+            const historyTable = document.getElementById('historyTable');
+            const row = document.createElement('tr');
+            const resultText = prediction === 1 ? 'Safe' : prediction === 0 ? 'Suspicious' : 'Malicious';
+            const resultClass = prediction === 1 ? 'text-green-400' : prediction === 0 ? 'text-yellow-400' : 'text-red-400';
+            const timestamp = new Date().toLocaleString();
+
+            row.innerHTML = `
+                <td class="px-4 py-2 truncate max-w-xs">${url}</td>
+                <td class="px-4 py-2 ${resultClass}">${resultText}</td>
+                <td class="px-4 py-2">${timestamp}</td>
+            `;
+            historyTable.prepend(row);
+
+            // Save to local storage
+            const history = JSON.parse(localStorage.getItem('urlHistory') || '[]');
+            history.unshift({ url, prediction, timestamp });
+            if (history.length > 10) history.pop(); // Limit to 10 entries
+            localStorage.setItem('urlHistory', JSON.stringify(history));
+        }
+
+        // Clear history
+        function clearHistory() {
+            const historyTable = document.getElementById('historyTable');
+            historyTable.innerHTML = ''; // Clear table
+            localStorage.removeItem('urlHistory'); // Clear local storage
+        }
+
+        // Disable initial history load
+        // window.onload = function() {
+        //     const history = JSON.parse(localStorage.getItem('urlHistory') || '[]');
+        //     history.forEach(item => addToHistory(item.url, item.prediction));
+        // };
+    </script>
+</body>
+</html>
