@@ -10,5 +10,7 @@ mlflow
 fastapi
 uvicorn
 python-multipart
+beautifulsoup4
+python-whois
 
 ## -e .
