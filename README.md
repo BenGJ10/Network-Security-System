@@ -118,8 +118,8 @@ This project represents a significant step toward democratizing URL security ana
 
 ---
 
-## Getting Started
-To run and test this locally:
+
+## To run and test this locally:
 
 - Clone the repository: 
 ```bash
@@ -130,6 +130,9 @@ git clone <git@github.com:BenGJ10/Network-Security-System.git>.
 pip install -r requirements.txt.
 ```
 - Set up MongoDB Atlas and update .env with credentials.
+```bash
+touch .env # Add your MongoDB URL in this file
+```
 - Run the application: 
 ``` bash
 python3 app.py.
