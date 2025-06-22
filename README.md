@@ -50,7 +50,6 @@ The core of this system is built around the ETL process:
 
 ---
 
-
 ## Data Ingestion
 
 The **Data Ingestion** module fetches raw data and prepares it for further processing.
@@ -62,6 +61,7 @@ The **Data Ingestion** module fetches raw data and prepares it for further proce
 
 **Benefits**: This approach ensures reproducibility and provides a clean, traceable interface for downstream pipeline stages, making it easy to integrate with subsequent processes.
 
+--- 
 
 ## Data Validation
 
@@ -81,6 +81,7 @@ The **Data Validation** module ensures input data quality and schema compliance.
 
 **Benefits**: This phase enhances model reliability by maintaining test-train consistency and mitigating risks from corrupted or drifted data.
 
+---
 
 ## Data Transformation
 
@@ -95,6 +96,7 @@ This module prepares validated data for machine learning.
 
 **Benefits**: The transformed data is clean and optimized for machine learning, with stored transformation logic enabling consistent inference on new data.
 
+---
 
 ## Model Training
 
