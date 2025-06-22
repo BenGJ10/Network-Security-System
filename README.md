@@ -1,4 +1,4 @@
-# Network Security System Project for URL Security Analysis
+# Network Security ML Project for URL Security Analysis
 
 This project focuses on building a Network Security System that processes phishing data using ETL (Extract, Transform, Load) pipelines. A project designed to empower users with a robust tool for analyzing URLs and detecting potential security threats, such as phishing and malicious links. In an era where cyber threats are increasingly sophisticated, the need for accessible and reliable security solutions has never been greater.
 
