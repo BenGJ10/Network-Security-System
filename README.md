@@ -6,6 +6,10 @@ This project focuses on building a Network Security System that processes phishi
 
 The system, is engineered to identify, analyze, and mitigate phishing-related threats through a structured and automated data workflow. It is designed to streamline the ingestion and processing of extensive datasets associated with phishing activities, ensuring robust security analysis and accurate threat detection. The pipeline incorporates several critical stages: data validation to ensure data integrity, transformation to prepare data for analysis, model building to develop predictive algorithms, and deployment processes to push the trained models and insights into production, enabling real-time security enhancements.
 
+## Workflow
+![Workflow Diagram](images/workflow.png)
+
+--- 
 
 ## Technical Infrastructure
 
@@ -41,8 +45,6 @@ FastAPI powers the backend operations of the model, enabling both automated trai
   ![Models folder](images/models.png)
 
 ---
-## Workflow
-![Workflow Diagram](images/workflow.png)
 
 ##  ETL Pipeline – Extract, Transform, Load
 
