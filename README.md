@@ -16,7 +16,7 @@ The system, is engineered to identify, analyze, and mitigate phishing-related th
 | **Database**             | MongoDB Atlas                                           | Provides a secure, cloud-based storage solution for analysis history|
 | **ML Models**            | Random Forest, Adaboost, Gradient Boost                 | Implements advanced machine learning models to accurately detect malicious URLs|
 | **Tracking**             | Custom Logging                                          | Tracks model performance metrics like F1-score, precision, and recall via logs|
-
+| **Cloud Storage**        | AWS S3 Bucket                                           | Stores artifacts, trained models with logs                     |
 ---
 
 ## Prediction Review
@@ -25,10 +25,24 @@ The system, is engineered to identify, analyze, and mitigate phishing-related th
  
 ---
 
+## FastAPI Backend
+FastAPI powers the backend operations of the model, enabling both automated training and real-time predictions:
+
+- Training Endpoint (/train): Exposes a REST endpoint to trigger the entire training pipeline—including data ingestion, validation, transformation, and model training. Also pushes artifacts and trained models to AWS S3 bucket named `networksecurity-proj-v1`
+
+- Batch Prediction Endpoint (/predict): Supports batch inference by accepting CSV file uploads containing multiple URL records. The system processes the input, applies the saved model and preprocessor, and returns the predictions in a user-friendly HTML table. Optionally, results can be saved.
+
+- Training Execution:
+  ![Training Diagram](images/training.png)
+
+- AWS S3 Buckets:
+
+  ![Artifacts folder](images/artifacts.png)
+  ![Models folder](images/models.png)
+
+---
 ## Workflow
 ![Workflow Diagram](images/workflow.png)
-
-The core of this system is built around the ETL process:
 
 ##  ETL Pipeline – Extract, Transform, Load
 
@@ -111,6 +125,7 @@ The **Model Trainer** selects and trains the best-performing model from multiple
 **Benefits**: This automated and modular design simplifies model selection, ensures high performance, and preserves the entire pipeline for future use.
 
 ---
+
 
 
 ## Conclusion
