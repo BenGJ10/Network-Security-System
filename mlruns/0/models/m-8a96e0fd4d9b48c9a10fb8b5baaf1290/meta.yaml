@@ -1,0 +1,10 @@
+artifact_location: file:///Users/bengj/Data%20Science/Network%20Security%20System/mlruns/0/models/m-8a96e0fd4d9b48c9a10fb8b5baaf1290/artifacts
+creation_timestamp: 1750661138192
+experiment_id: '0'
+last_updated_timestamp: 1750661140222
+model_id: m-8a96e0fd4d9b48c9a10fb8b5baaf1290
+model_type: null
+name: best_model
+source_run_id: a16d7a32962942679317bdcfa6919c09
+status: 2
+status_message: null

@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/bengj/Data%20Science/Network%20Security%20System/mlruns/0/a16d7a32962942679317bdcfa6919c09/artifacts
+end_time: 1750661140225
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a16d7a32962942679317bdcfa6919c09
+run_name: selective-sponge-496
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750661138178
+status: 3
+tags: []
+user_id: bengj

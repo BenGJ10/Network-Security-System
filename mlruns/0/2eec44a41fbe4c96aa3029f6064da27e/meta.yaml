@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/bengj/Data%20Science/Network%20Security%20System/mlruns/0/2eec44a41fbe4c96aa3029f6064da27e/artifacts
+end_time: 1750660764337
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2eec44a41fbe4c96aa3029f6064da27e
+run_name: bouncy-cat-601
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750660762134
+status: 3
+tags: []
+user_id: bengj
