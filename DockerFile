@@ -1,0 +1,8 @@
+FROM python:3.12-slim-buster
+WORKDIR /app
+COPY . /app
+
+RUN apt update -y && apt install awlcli -y
+
+RUN apt-get update && pip install -re reqquirements.txt
+CMD ["python3", "fastapi_prediction.py"]
