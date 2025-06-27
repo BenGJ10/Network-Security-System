@@ -20,7 +20,9 @@ The system, is engineered to identify, analyze, and mitigate phishing-related th
 | **Database**             | MongoDB Atlas                                           | Provides a secure, cloud-based storage solution for analysis history|
 | **ML Models**            | Random Forest, Adaboost, Gradient Boost                 | Implements advanced machine learning models to accurately detect malicious URLs|
 | **Tracking**             | Custom Logging                                          | Tracks model performance metrics like F1-score, precision, and recall via logs|
+| **CI/CD**                | GitHub Actions                                          | Automates testing, containerization, and deployment            |
 | **Cloud Storage**        | AWS S3 Bucket                                           | Stores artifacts, trained models with logs                     |
+| **Containerization**     | AWS ECR                                                 | Hosts Docker images built via GitHub Actions                   |
 ---
 
 ## Prediction Review
@@ -39,11 +41,20 @@ FastAPI powers the backend operations of the model, enabling both automated trai
 - Training Execution:
   ![Training Diagram](images/training.png)
 
-- AWS S3 Buckets:
+- CI/CD Pipelines:
+  Automated with GitHub Actions, runs on every push to the main branch.<br>
+  Pipeline includes: Linting & testing, Docker image build, Push to AWS ECR and Upload artifacts to AWS S3
+  
+  ![CICD](images/githubcicd.png)
 
+- AWS S3 Buckets:
+  Model artifacts and logs are automatically uploaded to AWS S3 buckets, organized into folders like artifacts/ and models/ for efficient tracking and versioning.
   ![Artifacts folder](images/artifacts.png)
   ![Models folder](images/models.png)
 
+- AWS ECR Registry:
+  Docker images generated from successful builds are pushed to the AWS ECR registry, enabling scalable deployment across cloud environments.
+  ![ECR](images/ecr.png)
 ---
 
 ##  ETL Pipeline – Extract, Transform, Load
